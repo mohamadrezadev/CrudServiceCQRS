@@ -20,6 +20,7 @@ namespace Application.Configuration
             CreateMap<Order, DeleteOrder>().ReverseMap();
             
             CreateMap<Product,CreateProduct >().ReverseMap();
+            CreateMap<Product,UpdateProduct >().ReverseMap();
 
         }
     }

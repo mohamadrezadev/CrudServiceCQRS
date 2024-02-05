@@ -1,9 +1,9 @@
 ﻿using Domain.Entities.Products;
 using MediatR;
 
-namespace Application.Entities.Products.Queries
+namespace Application.Entities.Products.Commands
 {
-    public class GetProductByid :IRequest<Product>
+    public class DeleteProduct : IRequest<bool>
     {
         public int Id { get; set; }
     }

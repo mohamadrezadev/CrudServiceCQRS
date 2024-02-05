@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Application.Entities.Products.Handlers
 {
-    
+
     public class CreateProductHandler : IRequestHandler<CreateProduct, int>
     {
         private readonly IUnitOfWork _unitOfWork;
