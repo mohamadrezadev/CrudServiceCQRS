@@ -27,10 +27,10 @@ namespace Infrastructure.UOW
             OrderRepository = new OrderRepository(dbContext);
         }
 
-        public void Dispose( )
+        public  void Dispose( )
         {
            
-            _context.Dispose();
+            
         }
         public async Task SaveAsync(CancellationToken cancellationToken )
         {

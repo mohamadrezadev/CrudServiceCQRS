@@ -1,6 +1,6 @@
-﻿using Application.Interface.Products;
-using FluentValidation;
+﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace Application.DependencyInjections
 {
@@ -14,7 +14,7 @@ namespace Application.DependencyInjections
                 configuration.RegisterServicesFromAssembly(assembly));
 
             services.AddValidatorsFromAssembly(assembly);
-
+            services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
             return services;
         }

@@ -10,6 +10,6 @@ namespace Application.Interface
 {
     public interface IUserRepository : IRepository<User>
     {
-        Task<bool> AddRoleToUserAsync(User user, UserRole userRole);
+        Task<bool> AddRoleToUserAsync(User user, Role userRole);
     }
 }
