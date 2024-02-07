@@ -2,6 +2,7 @@
 using Domain.Entities.Orders;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,9 +17,7 @@ namespace Domain.Entities.Products
         public int Price { get; set; }
         public string imageURl { get; set; }
 
-
-        public int OrderDetailId { get; set; }
-        public virtual OrderDetail OrderDetail { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
 
     }
 }

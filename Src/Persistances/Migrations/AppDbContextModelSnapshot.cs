@@ -63,8 +63,7 @@ namespace Persistances.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.HasIndex("ProductId")
-                        .IsUnique();
+                    b.HasIndex("ProductId");
 
                     b.ToTable("OrderDetails");
                 });
@@ -82,9 +81,6 @@ namespace Persistances.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("OrderDetailId")
-                        .HasColumnType("INTEGER");
 
                     b.Property<int>("Price")
                         .HasColumnType("INTEGER");
@@ -328,9 +324,9 @@ namespace Persistances.Migrations
                         .IsRequired();
 
                     b.HasOne("Domain.Entities.Products.Product", "Product")
-                        .WithOne("OrderDetail")
-                        .HasForeignKey("Domain.Entities.Orders.OrderDetail", "ProductId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Order");
@@ -396,8 +392,7 @@ namespace Persistances.Migrations
 
             modelBuilder.Entity("Domain.Entities.Products.Product", b =>
                 {
-                    b.Navigation("OrderDetail")
-                        .IsRequired();
+                    b.Navigation("OrderDetails");
                 });
 
             modelBuilder.Entity("Domain.Entities.Users.User", b =>

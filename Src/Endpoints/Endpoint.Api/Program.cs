@@ -1,5 +1,10 @@
-using Application.DependencyInjections;
+﻿using Application.DependencyInjections;
+using Application.Tools.Identity;
+using Domain.Entities.Users;
+using Endpoint.Api.DependencyInjections;
 using Infrastructure.DependencyInjections;
+using Microsoft.AspNetCore.Identity;
+using Persistances.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +15,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApplication().AddInfrastructure(builder.Configuration);
+
+     
+builder.Services.AddServices(builder.Configuration);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -24,7 +33,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
-
+app.MapSwagger().RequireAuthorization();
 
 app.Run();

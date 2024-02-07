@@ -1,6 +1,7 @@
 ﻿using Application.Tools;
 using Domain.Entities.Users;
 using FluentValidation;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Reflection;
@@ -19,7 +20,7 @@ namespace Application.DependencyInjections
             services.AddValidatorsFromAssembly(assembly);
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
-         
+          
 
             return services;
         }

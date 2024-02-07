@@ -52,20 +52,21 @@ namespace Persistances.Contexts
 				.WithMany(od=>od.orderDetails)
 				.OnDelete(DeleteBehavior.Restrict);
 
-			builder.Entity<OrderDetail>()
-				.HasOne(od => od.Product)
-				.WithOne(p => p.OrderDetail)
-				.HasForeignKey<OrderDetail>(od => od.ProductId)
-				.OnDelete(DeleteBehavior.Restrict);
+			//builder.Entity<OrderDetail>()
+			//	.HasOne(od => od.Product)
+			//	.WithOne(p => p.OrderDetail)
+			//	.HasForeignKey<OrderDetail>(od => od.ProductId)
+			//	.OnDelete(DeleteBehavior.Restrict);
 
-			builder.Entity<Product>()
-				.HasOne(p => p.OrderDetail)
-				.WithOne(od => od.Product)
-				.HasForeignKey<OrderDetail>(od => od.ProductId)
-				.OnDelete(DeleteBehavior.Restrict);
+			//builder.Entity<Product>()
+			//	.HasOne(p => p.OrderDetail)
+			//	.WithOne(od => od.Product)
+			//	.HasForeignKey<OrderDetail>(od => od.ProductId)
+			//	.OnDelete(DeleteBehavior.Restrict);
 
 			base.OnModelCreating(builder);
+          
 
-		}
+        }
 	}
 }

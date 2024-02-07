@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Persistances.Migrations
 {
     /// <inheritdoc />
-    public partial class initdb : Migration
+    public partial class initmig : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -64,8 +64,7 @@ namespace Persistances.Migrations
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Description = table.Column<string>(type: "TEXT", nullable: false),
                     Price = table.Column<int>(type: "INTEGER", nullable: false),
-                    imageURl = table.Column<string>(type: "TEXT", nullable: false),
-                    OrderDetailId = table.Column<int>(type: "INTEGER", nullable: false)
+                    imageURl = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -224,7 +223,7 @@ namespace Persistances.Migrations
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -272,8 +271,7 @@ namespace Persistances.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_OrderDetails_ProductId",
                 table: "OrderDetails",
-                column: "ProductId",
-                unique: true);
+                column: "ProductId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_UserId",

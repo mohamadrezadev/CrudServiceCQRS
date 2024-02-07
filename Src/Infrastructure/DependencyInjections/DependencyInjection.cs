@@ -1,6 +1,9 @@
 ﻿using Application.Interface;
 using Application.Interface.Common;
+using Application.Tools.Identity;
+using Domain.Entities.Users;
 using Infrastructure.UOW;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -39,11 +42,20 @@ namespace Infrastructure.DependencyInjections
         {
             services.AddDbContext<AppDbContext>(op =>
             {
-                op.UseSqlite(configuration.GetConnectionString("Database"));
+                op.UseSqlite(configuration.GetConnectionString("SqliteDb"));
+                op.UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll);
                 op.EnableSensitiveDataLogging();
             });
-            
-          
+
+            services.AddIdentity<User, Role>(IdentityConfig.ConfigureIdentityOptions)
+                      .AddUserManager<UserManager<User>>()
+                      .AddRoles<Role>()
+                      
+                       .AddDefaultTokenProviders()
+                        .AddErrorDescriber<PersianIdentityErrors>()
+                         .AddRoleManager<RoleManager<Role>>()
+                         .AddEntityFrameworkStores<AppDbContext>(); // Add this line if you are using custom roles (Role class).
+
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<IUnitOfWork,UnitOfWork>();
