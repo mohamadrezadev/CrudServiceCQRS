@@ -1,4 +1,5 @@
 ﻿using Domain.Common;
+using Domain.Entities.Orders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,11 @@ namespace Domain.Entities.Products
         public string Name { get; set; }
         public string Description { get; set; }
         public int Price { get; set; }
+        public string imageURl { get; set; }
+
+
+        public int OrderDetailId { get; set; }
+        public virtual OrderDetail OrderDetail { get; set; }
 
     }
 }

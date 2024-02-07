@@ -1,8 +1,10 @@
 ﻿using Application.Entities.Orders.Commands;
 using Application.Entities.Products.Commands;
+using Application.Entities.Users.Commands;
 using AutoMapper;
 using Domain.Entities.Orders;
 using Domain.Entities.Products;
+using Domain.Entities.Users;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
@@ -21,6 +23,10 @@ namespace Application.Configuration
             
             CreateMap<Product,CreateProduct >().ReverseMap();
             CreateMap<Product,UpdateProduct >().ReverseMap();
+
+            CreateMap<RegisterUser,User >().ReverseMap();
+            CreateMap<UserDto,User >().ReverseMap();
+
 
         }
     }

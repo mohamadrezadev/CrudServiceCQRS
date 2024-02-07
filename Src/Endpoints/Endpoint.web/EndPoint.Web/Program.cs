@@ -1,7 +1,22 @@
+using Application.Tools;
+using Domain.Entities.Users;
+using Microsoft.AspNetCore.Identity;
+using Persistances.Contexts;
+using Application.DependencyInjections;
+using Infrastructure.DependencyInjections;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using System;
+using EndPoint.Web.DependencyInjections;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+builder.Services.AddApplication().AddInfrastructure(builder.Configuration);
+builder.Services.AddServices();
+
 
 var app = builder.Build();
 

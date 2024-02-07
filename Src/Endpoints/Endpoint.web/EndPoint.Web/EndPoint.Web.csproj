@@ -7,68 +7,36 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="obj\**" />
+    <Content Remove="obj\**" />
+    <EmbeddedResource Remove="obj\**" />
+    <None Remove="obj\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Views\Home\Privacy.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="obj\Debug\net8.0\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs" />
-    <Compile Include="obj\Debug\net8.0\EndPoint.Web.AssemblyInfo.cs" />
-    <Compile Include="obj\Debug\net8.0\EndPoint.Web.GlobalUsings.g.cs" />
-    <Compile Include="obj\Debug\net8.0\EndPoint.Web.MvcApplicationPartsAssemblyInfo.cs" />
-    <Compile Include="obj\Debug\net8.0\EndPoint.Web.RazorAssemblyInfo.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="obj\Debug\net8.0\ApiEndpoints.json" />
-    <Content Include="obj\Debug\net8.0\EndPoint.Web.csproj.FileListAbsolute.txt" />
-    <Content Include="obj\Debug\net8.0\EndPoint.Web.sourcelink.json" />
-    <Content Include="obj\Debug\net8.0\scopedcss\bundle\EndPoint.Web.styles.css" />
-    <Content Include="obj\Debug\net8.0\scopedcss\projectbundle\EndPoint.Web.bundle.scp.css" />
-    <Content Include="obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css" />
-    <Content Include="obj\Debug\net8.0\staticwebassets.build.json" />
-    <Content Include="obj\Debug\net8.0\staticwebassets.development.json" />
-    <Content Include="obj\Debug\net8.0\staticwebassets.pack.json" />
-    <Content Include="obj\EndPoint.Web.csproj.nuget.dgspec.json" />
-    <Content Include="obj\project.assets.json" />
     <Content Include="tailwind.config.js" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="8.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="Models\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="obj\Debug\net8.0\apphost.exe" />
-    <None Include="obj\Debug\net8.0\EndPoint.C9DB4A03.Up2Date" />
-    <None Include="obj\Debug\net8.0\EndPoint.Web.AssemblyInfoInputs.cache" />
-    <None Include="obj\Debug\net8.0\EndPoint.Web.assets.cache" />
-    <None Include="obj\Debug\net8.0\EndPoint.Web.csproj.AssemblyReference.cache" />
-    <None Include="obj\Debug\net8.0\EndPoint.Web.csproj.BuildWithSkipAnalyzers" />
-    <None Include="obj\Debug\net8.0\EndPoint.Web.csproj.CoreCompileInputs.cache" />
-    <None Include="obj\Debug\net8.0\EndPoint.Web.dll" />
-    <None Include="obj\Debug\net8.0\EndPoint.Web.GeneratedMSBuildEditorConfig.editorconfig" />
-    <None Include="obj\Debug\net8.0\EndPoint.Web.genruntimeconfig.cache" />
-    <None Include="obj\Debug\net8.0\EndPoint.Web.MvcApplicationPartsAssemblyInfo.cache" />
-    <None Include="obj\Debug\net8.0\EndPoint.Web.pdb" />
-    <None Include="obj\Debug\net8.0\EndPoint.Web.RazorAssemblyInfo.cache" />
-    <None Include="obj\Debug\net8.0\project.razor.vs.bin" />
-    <None Include="obj\Debug\net8.0\project.razor.vscode.bin" />
-    <None Include="obj\Debug\net8.0\refint\EndPoint.Web.dll" />
-    <None Include="obj\Debug\net8.0\ref\EndPoint.Web.dll" />
-    <None Include="obj\Debug\net8.0\staticwebassets\msbuild.build.EndPoint.Web.props" />
-    <None Include="obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.EndPoint.Web.props" />
-    <None Include="obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.EndPoint.Web.props" />
-    <None Include="obj\Debug\net8.0\staticwebassets\msbuild.EndPoint.Web.Microsoft.AspNetCore.StaticWebAssets.props" />
-    <None Include="obj\EndPoint.Web.csproj.nuget.g.props" />
-    <None Include="obj\EndPoint.Web.csproj.nuget.g.targets" />
-    <None Include="obj\project.nuget.cache" />
     <None Include="wwwroot\admin\fonts\vazir.woff2" />
     <None Include="wwwroot\admin\js\bootstrap.min.js" />
     <None Include="wwwroot\admin\js\chart.js" />
@@ -119,6 +87,11 @@
     <None Include="wwwroot\lib\jquery\dist\jquery.js" />
     <None Include="wwwroot\lib\jquery\dist\jquery.min.js" />
     <None Include="wwwroot\lib\jquery\dist\jquery.min.map" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Application\Application.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructure\Infrastructure.csproj" />
   </ItemGroup>
   <Target Name="CheckForNpm" BeforeTargets="NpmInstall">
     <Exec Command="npm -v" ContinueOnError="true">
