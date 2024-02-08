@@ -1,4 +1,5 @@
-﻿using Application.Entities.Users.Commands;
+﻿using Application.Entities.Orders.Queries;
+using Application.Entities.Users.Commands;
 using Domain.Entities.Users;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 using NuGet.Protocol;
 using System;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace EndPoint.Web.Controllers
@@ -57,9 +59,15 @@ namespace EndPoint.Web.Controllers
             return View(model);
         }
 
+		[Authorize]
+		public async Task<IActionResult> logout( CancellationToken cancellationToken)
+		{
+            await _mediator.Send(new LogoutUser(), cancellationToken);
 
+			    return RedirectToAction("Index","Home");
+		}
 
-        [HttpPost]
+		[HttpPost]
         public async Task<IActionResult> Login( LoginVM model )
         {
             if (!ModelState.IsValid)
@@ -102,12 +110,15 @@ namespace EndPoint.Web.Controllers
             return View();
         }
 
-        [Authorize]
-        public async Task<IActionResult> logout( )
+        public async Task<IActionResult> MyOrder( )
         {
-
-            return View();
+            var userIdString = HttpContext.User.FindFirstValue(claimType: ClaimTypes.NameIdentifier);
+            Guid.TryParse(userIdString, out Guid userId);
+           var result= await _mediator.Send(new GetOrdersUserById() { UserId=userId});
+            return View(result);
         }
+
+       
 
 
 

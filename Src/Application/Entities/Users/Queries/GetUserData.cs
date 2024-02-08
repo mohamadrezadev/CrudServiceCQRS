@@ -1,4 +1,4 @@
-﻿using Application.Entities.Users.Commands;
+﻿using Application.Entities.Dtos;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -13,5 +13,12 @@ namespace Application.Entities.Users.Queries
         public Guid Id { get; set; }
         public string Email { get; set; }
         public string Username { get; set; }
+    }
+    public class GetListUsers : IRequest<List<UserDto>>
+    {
+        public GetListUsers()
+        {
+            
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using Application.Entities.Dtos;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;

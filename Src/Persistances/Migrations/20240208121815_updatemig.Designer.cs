@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistances.Contexts;
 
@@ -10,9 +11,11 @@ using Persistances.Contexts;
 namespace Persistances.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240208121815_updatemig")]
+    partial class updatemig
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.1");
@@ -92,32 +95,6 @@ namespace Persistances.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Description = "One small reduction of the notch, one giant leap for the iPhone! That's the best description for the most minor iPhone upgrade yet - the Apple iPhone 13.",
-                            Name = "Apple iPhone 13",
-                            Price = 30000000,
-                            imageURl = "https://www.technolife.ir/image/small_product-TLP-4993_e62cc295-8d95-469e-bfa1-7bda32e2ee7b.png"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Description = "گوشی موبایل شیائومی مدل 13T Pro 5G ظرفیت 512 گیگابایت رم 12 گیگابایت",
-                            Name = "شیائومی مدل 13T Pro 5G",
-                            Price = 27700000,
-                            imageURl = "https://www.technolife.ir/image/small_product-TLP-28793_c8143e09-d41c-45a3-89cf-67cc8a8e8ce2.png"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Description = "گوشی موبايل سامسونگ مدل Galaxy S24 Plus 5G ظرفیت 256 گیگابایت رم 12 گیگابایت",
-                            Name = "موبايل سامسونگ مدل Galaxy S24 Plus 5G ",
-                            Price = 20900000,
-                            imageURl = "https://www.technolife.ir/image/small_product-TLP-28800_c90207e3-ccdc-4630-900a-337299189f08.png"
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Users.Role", b =>
@@ -352,7 +329,7 @@ namespace Persistances.Migrations
                     b.HasOne("Domain.Entities.Products.Product", "Product")
                         .WithMany("OrderDetails")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Order");

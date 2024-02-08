@@ -26,7 +26,8 @@ namespace Application.Entities.Orders.Handlers
         {
           var userwithOrders=  await _unitOfWork.UserRepository.Entities
               .Include(u => u.Orders)                            
-                .ThenInclude(o => o.orderDetails)              
+                .ThenInclude(o => o.orderDetails) 
+                .ThenInclude(p=>p.Product)
             .Where(u => u.Id.Equals(request.UserId))                    
             .FirstOrDefaultAsync();
 

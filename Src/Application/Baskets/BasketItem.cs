@@ -1,4 +1,5 @@
-﻿using Domain.Entities.Products;
+﻿using Application.Entities.Dtos;
+using Domain.Entities.Products;
 
 namespace Application.Baskets
 {
@@ -6,7 +7,7 @@ namespace Application.Baskets
     {
 
         public int Id { get; set; }
-        public Product Product { get; set; }
+        public ProductDto Product { get; set; }
         public int Quantity { get; set; }
     }
 

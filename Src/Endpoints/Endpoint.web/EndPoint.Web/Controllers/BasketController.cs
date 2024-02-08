@@ -32,7 +32,6 @@ namespace EndPoint.Web.Controllers
         public async Task<IActionResult> AddToBasket( int productId, string returnUrl )
         {
             var product=await _mediator.Send(new GetProductByid() { Id = productId });
-            
             sessionBasket.Add(product, 1);
             return RedirectToAction("Index", new { returnUrl = returnUrl });
           

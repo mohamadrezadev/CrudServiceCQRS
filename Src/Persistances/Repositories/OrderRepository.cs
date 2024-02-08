@@ -15,5 +15,13 @@ namespace Persistances.Repositories
         public OrderRepository( AppDbContext dbContext ) : base(dbContext)
         {
         }
-    }
+
+		public async Task CreateNewOrder( Order order ,CancellationToken cancellationToken)
+		{
+			DbContext.AttachRange(order.orderDetails.Select(d => d.Product));
+			await DbContext.Orders.AddAsync(order, cancellationToken);
+		    await DbContext.SaveChangesAsync(cancellationToken);
+			
+		}
+	}
 }

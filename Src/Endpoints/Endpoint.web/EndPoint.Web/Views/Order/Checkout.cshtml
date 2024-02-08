@@ -1,0 +1,27 @@
+﻿
+@model EndPoint.Web.Models.ViewModels.CheckoutViewModel
+@{
+    ViewData["Title"] = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post" asp-action="Checkout" asp-controller="Order" class="max-w-md mx-auto p-6 bg-white border rounded shadow-md">
+    <div asp-validation-summary="All"></div>
+    <div class="mb-4">
+        <label asp-for="Name" class="block text-gray-700 text-sm font-bold mb-2"></label>
+        <input type="text" value="@User.Identity.Name" asp-for="Name" class="form-input w-full px-3 py-2 border rounded-md" />
+    </div>
+    <div class="mb-4">
+        <label asp-for="City" class="block text-gray-700 text-sm font-bold mb-2"></label>
+        <input type="text" asp-for="City" class="form-input w-full px-3 py-2 border rounded-md" />
+    </div>
+    <div class="mb-4">
+        <label asp-for="Address" class="block text-gray-700 text-sm font-bold mb-2"></label>
+        <input type="text" asp-for="Address" class="form-input w-full px-3 py-2 border rounded-md" />
+    </div>
+    <div>
+        <input class="btn bg-green-500 text-white hover:bg-green-600 py-2 px-4 rounded" type="submit" value="Save Order" />
+    </div>
+</form>
+
+

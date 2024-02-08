@@ -1,6 +1,7 @@
 ﻿using Application.Baskets;
 using Domain.Entities.Products;
 using Application.Extentions;
+using Application.Entities.Dtos;
 
 namespace EndPoint.Web.Models.ViewModels
 {
@@ -16,12 +17,12 @@ namespace EndPoint.Web.Models.ViewModels
 
             return basket;
         }
-        public override void Add( Product product, int quantity )
+        public override void Add( ProductDto product, int quantity )
         {
             base.Add(product, quantity);
             _session.SetJson("Basket", this);
         }
-        public override void Remove( Product product )
+        public override void Remove( ProductDto product )
         {
             base.Remove(product);
 

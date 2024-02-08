@@ -1,4 +1,5 @@
-﻿using Domain.Entities.Products;
+﻿using Application.Entities.Dtos;
+using Domain.Entities.Products;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ public class Basket
 {
     private List<BasketItem> _items = new();
 
-    public virtual void Add( Product product, int quantity )
+    public virtual void Add( ProductDto product, int quantity )
     {
         var basketItem = _items.Where(c => c.Product.Id == product.Id).FirstOrDefault();
         if (basketItem != null)
@@ -28,7 +29,7 @@ public class Basket
         }
     }
 
-    public virtual void Remove( Product product ) =>
+    public virtual void Remove( ProductDto product ) =>
         _items.RemoveAll(c => c.Product.Id == product.Id);
 
     public int TotalPrice( ) =>

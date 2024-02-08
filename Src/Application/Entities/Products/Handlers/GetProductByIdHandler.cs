@@ -1,4 +1,5 @@
-﻿using Application.Entities.Products.Queries;
+﻿using Application.Entities.Dtos;
+using Application.Entities.Products.Queries;
 using Application.Interface.Common;
 using AutoMapper;
 using Domain.Entities.Products;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Application.Entities.Products.Handlers
 {
-    public class GetProductByidHandler : IRequestHandler<GetProductByid, Product>
+    public class GetProductByidHandler : IRequestHandler<GetProductByid, ProductDto>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -21,10 +22,11 @@ namespace Application.Entities.Products.Handlers
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public async Task<Product> Handle( GetProductByid request, CancellationToken cancellationToken )
+        public async Task<ProductDto> Handle( GetProductByid request, CancellationToken cancellationToken )
         {
             var product = await _unitOfWork.ProductRepository.GetByIdAsync(cancellationToken, request.Id);
-            return product;
+            
+            return _mapper.Map<ProductDto>(product);
         }
     }
 }

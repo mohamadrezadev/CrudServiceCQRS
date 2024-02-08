@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistances.Contexts;
 
@@ -10,9 +11,11 @@ using Persistances.Contexts;
 namespace Persistances.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240208124725_updatemig2")]
+    partial class updatemig2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.1");
@@ -96,7 +99,7 @@ namespace Persistances.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = 2,
                             Description = "One small reduction of the notch, one giant leap for the iPhone! That's the best description for the most minor iPhone upgrade yet - the Apple iPhone 13.",
                             Name = "Apple iPhone 13",
                             Price = 30000000,
@@ -104,7 +107,7 @@ namespace Persistances.Migrations
                         },
                         new
                         {
-                            Id = 2,
+                            Id = 3,
                             Description = "گوشی موبایل شیائومی مدل 13T Pro 5G ظرفیت 512 گیگابایت رم 12 گیگابایت",
                             Name = "شیائومی مدل 13T Pro 5G",
                             Price = 27700000,
@@ -112,7 +115,7 @@ namespace Persistances.Migrations
                         },
                         new
                         {
-                            Id = 3,
+                            Id = 4,
                             Description = "گوشی موبايل سامسونگ مدل Galaxy S24 Plus 5G ظرفیت 256 گیگابایت رم 12 گیگابایت",
                             Name = "موبايل سامسونگ مدل Galaxy S24 Plus 5G ",
                             Price = 20900000,

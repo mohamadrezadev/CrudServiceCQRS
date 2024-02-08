@@ -24,8 +24,9 @@ namespace Application.Entities.Orders.Handlers
             {
                 var neworder = _mapper.Map<Order>(request.Order);
                 neworder.orderDetails=_mapper.Map<List<OrderDetail>>(request.Order.orderDetails);
+                
                 neworder.UserId = finduser.Id;
-                await _unitOfWork.OrderRepository.AddAsync(neworder, cancellationToken);
+                await _unitOfWork.OrderRepository.CreateNewOrder(neworder, cancellationToken);
                 return true;
             }
 
