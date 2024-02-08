@@ -1,4 +1,5 @@
-﻿using Application.Entities.Orders.Queries;
+﻿using Application.Entities.Dtos;
+using Application.Entities.Orders.Queries;
 using Application.Interface.Common;
 using AutoMapper;
 using Domain.Entities.Orders;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Application.Entities.Orders.Handlers
 {
-    public class GetOrderByIdHandler : IRequestHandler<GetOrderById, Order>
+    public class GetOrderByIdHandler : IRequestHandler<GetOrderById, OrderDto>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -21,12 +22,13 @@ namespace Application.Entities.Orders.Handlers
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
-        public async Task<Order> Handle( GetOrderById request, CancellationToken cancellationToken )
+        public async Task<OrderDto> Handle( GetOrderById request, CancellationToken cancellationToken )
         {
            var result= await _unitOfWork.OrderRepository.GetByIdAsync(cancellationToken, request.Id);
             if ( result is not null )
             {
-                   return result;
+               
+                   return _mapper.Map<OrderDto>(result);
             }
             return new();
         }

@@ -1,10 +1,9 @@
 ﻿@page
-@model EndPoint.Web.Views.Shared.Components.Product.DefaultModel
+@model List<Application.Entities.Dtos.ProductDto>
 @section pre
 {
 
 }
-<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 mx-4">
 
     <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <a href="#">
@@ -40,6 +39,7 @@
             </div>
         </div>
     </div>
+   
     <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
         <a href="#">
             <img class="p-8 rounded-t-lg" src="https://flowbite.com/docs/images/products/apple-watch.png" alt="product image" />
@@ -142,8 +142,6 @@
             </div>
         </div>
     </div>
-
-</div>
 
 
 @section Scripts{

@@ -1,13 +1,13 @@
-﻿using Application.Entities.Products.Queries;
+﻿using Application.Entities.Dtos;
+using Application.Entities.Products.Queries;
 using Application.Interface.Common;
 using AutoMapper;
-using Domain.Entities.Products;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Entities.Products.Handlers
 {
-    public class GetProductListHandler : IRequestHandler<GetProductList, List<Product>>
+    public class GetProductListHandler : IRequestHandler<GetProductList, List<ProductDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
@@ -18,9 +18,11 @@ namespace Application.Entities.Products.Handlers
             _mapper = mapper;
         }
 
-        public async Task<List<Product>> Handle( GetProductList request, CancellationToken cancellationToken )
+        public async Task<List<ProductDto>> Handle( GetProductList request, CancellationToken cancellationToken )
         {
-          return  await _unitOfWork.ProductRepository.Entities.ToListAsync(cancellationToken);
+            var res= await _unitOfWork.ProductRepository.Entities.ToListAsync(cancellationToken);
+             
+            return _mapper.Map<List<ProductDto>>(res); ;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Application.Tools.Identity;
+﻿using Application.Baskets;
+using Application.Tools.Identity;
 using Domain.Entities.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +27,9 @@ namespace EndPoint.Web.DependencyInjections
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromDays(3);
             });
+            Services.AddScoped<Basket>(c => SessionBasket.GetBasket(c));
+            Services.AddMemoryCache();
+            Services.AddSession();
             Services.AddControllersWithViews().AddRazorRuntimeCompilation();
             return Services;
         }

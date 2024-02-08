@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Domain.Entities.Users;
+using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +12,10 @@ namespace Application.Interface.Common
     {
         IProductRepository ProductRepository { get; }
         IOrderRepository OrderRepository { get; }
+        IUserRepository UserRepository { get; }
+        UserManager<User>      UserManager { get; }
+        RoleManager<Role> RoleManager { get; }
+        SignInManager<User> SignInManager { get; }
         Task SaveAsync(CancellationToken cancellationToken);
 
     }

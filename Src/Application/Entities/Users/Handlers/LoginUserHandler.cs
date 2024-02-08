@@ -1,4 +1,5 @@
 ﻿using Application.Entities.Users.Commands;
+using Application.Interface.Common;
 using AutoMapper;
 using Domain.Entities.Users;
 using MediatR;
@@ -13,23 +14,22 @@ namespace Application.Entities.Users.Handlers
 {
     public class LoginUserHandler : IRequestHandler<LoginUser, loginDto>
     {
-        private readonly UserManager<User> _userManager;
-        private readonly SignInManager<User> _signInManager;
+     
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public LoginUserHandler( UserManager<User> userManager, IMapper mapper, SignInManager<User> signInManager )
+        public LoginUserHandler( IUnitOfWork unitOfWork,   IMapper mapper )
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
         public async Task<loginDto> Handle( LoginUser request, CancellationToken cancellationToken )
         {
-            var finduser= await _userManager.FindByEmailAsync(request.Email);
+            var finduser= await _unitOfWork.UserManager.FindByEmailAsync(request.Email);
             if ( finduser != null )
             {
-				var roles = await _userManager.GetRolesAsync(finduser);
-				var Result = await _signInManager.PasswordSignInAsync(finduser, request.Password, true, false);
+				var roles = await _unitOfWork.UserManager.GetRolesAsync(finduser);
+				var Result = await _unitOfWork.SignInManager.PasswordSignInAsync(finduser, request.Password, true, false);
 				return new loginDto(Result, roles.ToList());
 			}
             return new() ;

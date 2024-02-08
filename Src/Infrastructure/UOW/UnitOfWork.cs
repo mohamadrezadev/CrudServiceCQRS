@@ -1,13 +1,11 @@
 ﻿using Application.Interface;
 using Application.Interface.Common;
-using Microsoft.EntityFrameworkCore;
+using Domain.Entities.Users;
+using Microsoft.AspNetCore.Identity;
 using Persistances.Contexts;
 using Persistances.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Persistances.Users;
+
 
 namespace Infrastructure.UOW
 {
@@ -22,10 +20,19 @@ namespace Infrastructure.UOW
 
         public IProductRepository ProductRepository { get; }
 
-        public UnitOfWork( AppDbContext dbContext)
+        public IUserRepository UserRepository { get; }
+
+        public UserManager<User> UserManager { get; }
+        public  RoleManager<Role> RoleManager { get; }
+        public SignInManager<User> SignInManager { get; }
+        public UnitOfWork( AppDbContext dbContext ,UserManager<User> userManager,RoleManager<Role> roleManager,SignInManager<User> signInManager)
         {
             ProductRepository = new ProductRepository(dbContext);
             OrderRepository = new OrderRepository(dbContext);
+            UserRepository=new UserRepository(dbContext);
+            UserManager = userManager;
+            RoleManager = roleManager;
+            SignInManager = signInManager;
         }
 
         public  void Dispose( )
