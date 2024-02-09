@@ -104,13 +104,14 @@ namespace EndPoint.Web.Controllers
 			}
 
         }
-        //[Authorize]
+       
+        [Authorize]
         public async Task<IActionResult> Profile( )
         {
             return View();
         }
-
-        public async Task<IActionResult> MyOrder( )
+		[Authorize]
+		public async Task<IActionResult> MyOrder( )
         {
             var userIdString = HttpContext.User.FindFirstValue(claimType: ClaimTypes.NameIdentifier);
             Guid.TryParse(userIdString, out Guid userId);

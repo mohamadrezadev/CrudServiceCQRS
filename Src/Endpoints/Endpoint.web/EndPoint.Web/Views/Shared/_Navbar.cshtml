@@ -55,6 +55,13 @@
                                         <i class="fa fa-cog fa-fw"></i> سبد خرید
                                     </a>
                                     <div class="border border-gray-800"></div>
+                                  
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <a asp-controller="Admin" asp-action="Index" class="p-2 hover:bg-gray-700 text-white text-sm no-underline hover:no-underline block transition duration-300 ease-in-out">
+                                            <i class="fa fa-user fa-fw"></i> پنل مدیریت
+                                        </a>
+                                    }
                                     <a asp-controller="Account" asp-action="logout" class="p-2 hover:bg-gray-700 text-white text-sm no-underline hover:no-underline block transition duration-300 ease-in-out">
                                         <i class="fas fa-sign-out-alt fa-fw"></i> خروج
                                     </a>

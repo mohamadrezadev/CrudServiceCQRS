@@ -8,15 +8,11 @@
     <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
     <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js" integrity="sha256-xKeoJ50pzbUGkpQxDYHD7o7hxe0LaOGeguUidbq6vis=" crossorigin="anonymous"></script>
-    <!--Regular Datatables CSS-->
     <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
-    <!--Responsive Extension Datatables CSS-->
     <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.3.1/css/all.min.css" rel="stylesheet">
     <link href="~/admin/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/admin/css/calendar.css" rel="stylesheet" />
-    <link href="~/admin/css/persian-datepicker.min.css" rel="stylesheet" />
     <link href="~/admin/css/box-statistics.css" rel="stylesheet" />
     <link href="~/admin/css/style.css" rel="stylesheet" />
 	<link rel="stylesheet" href="~/css/output.css" />
@@ -27,16 +23,22 @@
     <nav id="sidebar" class="active">
 
         <ul class="list-unstyled position-fixed components mb-5 mt-5">
-            <li class="active">
-                <a href="#"><span class="fa fa-home"></span> داشبورد </a>
+            <li >
+                    <a asp-controller="Admin" asp-action="Index" class="hover:bg-gray-700"><span class="fa fa-home"></span> داشبورد </a>
             </li>
             <li>
-                <a href="#"><span class="fa fa-user"></span> کاربرها </a>
+                    <a asp-controller="Admin" asp-action="Users" class="hover:bg-gray-700"><span class="fa fa-user"></span> کاربرها </a>
             </li>
             
             <li>
-                <a href="#"><span class="fa fa-cogs"></span> محصولات </a>
+                    <a asp-controller="Admin" asp-action="Products" class="hover:bg-gray-700"><span class="fa fa-cogs"></span> محصولات </a>
             </li>
+            <li>
+                    <a asp-controller="Account" asp-action="logout" class="p-2 hover:bg-gray-700 text-white text-sm no-underline hover:no-underline block transition duration-300 ease-in-out">
+                        <i class="fas fa-sign-out-alt fa-fw"></i> خروج
+                    </a>
+            </li>
+             
           
         </ul>
     </nav>
@@ -48,10 +50,11 @@
             <div class="container-fluid">
 
                 <button type="button" id="sidebarCollapse" class="btn btn-primary">
-                    <i class="fa fa-bars"></i>
+                        <i class="fa fa-bars"></i>
                     <span class="sr-only">منو</span>
                 </button>
-                <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto mr-2" type="button" data-toggle="collapse"
                         data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
@@ -80,7 +83,6 @@
             </div>
         </nav>
 
-        <h2 class="mb-4">داشبورد</h2>
         <div class="main-content">
 
                 @RenderBody()
@@ -101,29 +103,44 @@
       
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
-    <!--Datatables -->
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
-    <script>
-        function dropdown() {
-            document.querySelector("#submenu").classList.toggle("hidden");
-            document.querySelector("#arrow").classList.toggle("rotate-0");
-        }
-        dropdown();
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+     <script src="~/admin/js/bootstrap.min.js"></script>
+     <script>
+        (function ($) {
 
-        function openSidebar() {
-            document.querySelector(".sidebar").classList.toggle("hidden");
+            "use strict";
+
+            var fullHeight = function () {
+
+                $('.js-fullheight').css('height', $(window).height());
+                $(window).resize(function () {
+                    $('.js-fullheight').css('height', $(window).height());
+                });
+
+            };
+            fullHeight();
+
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+
+        })(jQuery);
+
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "250px";
+            document.getElementById("main").style.marginRight = "250px";
         }
-    </script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
-      
-        <script src="~/admin/js/bootstrap.min.js"></script>
-        <script src="~/admin/js/popper.js"></script>
-        <script src="~/admin/js/persian-datepicker.min.js"></script>
-        <script src="~/admin/js/persian-datepicker-date.min.js"></script>
- 
+
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+            document.getElementById("main").style.marginRight = "0";
+            document.getElementById("main").style.marginRight = "0";
+        }
+     </script>
 	@await RenderSectionAsync("Scripts", required: false)
+
 	</body>
 </html>
 

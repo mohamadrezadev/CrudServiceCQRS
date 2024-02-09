@@ -103,16 +103,54 @@
 <!--Container-->
 <div class="container w-full md:w-4/5 xl:w-3/5  mx-auto px-2">
 
+
 	<!--Title-->
 	<h1 class="flex items-center font-sans font-bold break-normal text-indigo-500 px-2 py-8 text-xl md:text-2xl">
 		محصولات
 	</h1>
 
-
+	<div class="container mt-2 mb-2">
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+			<i class="fas fa-plus"></i> افزودن مورد جدید
+		</button>
+		<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">اطلاعات مورد جدید</h5>
+						<button type="button" class="close" data-dismiss="modal" aria-label="بستن">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form asp-controller="Admin" asp-action="AddNewProduct" method="post">
+							<div class="form-group">
+								<label for="itemName">نام:</label>
+								<input type="text" class="form-control" name="Name" id="Name" placeholder="نام مورد" required>
+							</div>
+							<div class="form-group">
+								<label for="itemPrice">قیمت:</label>
+								<input type="number" class="form-control" name="Price" id="Price" placeholder="قیمت مورد" required>
+							</div>
+							<div class="form-group">
+								<label for="itemDescription">توضیحات:</label>
+								<textarea class="form-control" id="Description" name="Description" rows="3" placeholder="توضیحات مورد"></textarea>
+							</div>
+							<div class="form-group">
+								<label for="itemImageLink">لینک تصویر:</label>
+								<input type="text" class="form-control" id="imageURl" name="imageURl" placeholder="لینک تصویر مورد">
+							</div>
+							<button type="submit" class="btn btn-primary">ذخیره</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!--Card-->
 	<div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
 
-
+		
 		<table id="example" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
 			<thead>
 				<tr>
@@ -120,7 +158,8 @@
 					<th data-priority="2">قیمت </th>
 					<th data-priority="3">تصویر</th>
 					<th data-priority="4">توضیحات</th>
-					<th data-priority="4"></th>
+					<th data-priority="5">حذف</th>
+					<th data-priority="6">ویرایش</th>
 
 
 
@@ -133,13 +172,22 @@
 						<td>@item.Name</td>
 						<td>@item.Price</td>
 						<td>@item.imageURl</td>
-						<td>@item.Description</td>
 						<td>
-							<form asp-action="" asp-controller="" method="post">
-								<input type="hidden" name="productId" value="@item.Id">
-								<button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded">حذف</button>
+							<p class="text-left rtl:text-right text-gray-500 dark:text-gray-400"> @item.Description</p>
+						</td>
+						<td>
+							<form asp-controller="Admin" asp-action="DeleteProduct" method="get">
+								<input type="hidden" name="Id" value="@item.Id">
+								<button type="submit" class="bg-gray-800 hover:bg-red-700 text-white font-bold py-1 px-2 rounded">حذف</button>
 							</form>
-							<button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded">ویرایش</button>
+							
+						</td>
+						<td>
+							<button type="button" class="edit-button bg-gray-800 hover:bg-red-700 text-white font-bold py-1 px-2 rounded" 
+								data-toggle="modal" data-target="#EditProduct"
+									data-id="@item.Id" data-name="@item.Name" data-price="@item.Price" data-description="@item.Description" data-imageurl="@item.imageURl">
+								ویرایش
+							</button>
 						</td>
 
 					</tr>
@@ -154,12 +202,60 @@
 	</div>
 
 	<!--/Card-->
-
+	<div class="modal" id="EditProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">اطلاعات مورد جدید</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="بستن">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form asp-controller="Admin" asp-action="UpdateProduct" method="post">
+						<input type="hidden" name="Id" id="productid" value="" />
+						<div class="form-group">
+							<label for="itemName">نام:</label>
+							<input type="text" class="form-control" name="Name" id="editName" placeholder="نام مورد" required>
+							
+						</div>
+						<div class="form-group">
+							<label for="itemPrice">قیمت:</label>
+							<input type="number" class="form-control" name="Price" id="editPrice" placeholder="قیمت مورد" required>
+						</div>
+						<div class="form-group">
+							<label for="itemDescription">توضیحات:</label>
+							<textarea class="form-control" id="editDescription" name="Description" rows="3" placeholder="توضیحات مورد"></textarea>
+						</div>
+						<div class="form-group">
+							<label for="itemImageLink">لینک تصویر:</label>
+							<input type="text" class="form-control" id="editImageUrl" name="imageURl" placeholder="لینک تصویر مورد">
+						</div>
+						<button type="submit" class="btn btn-primary">ذخیره</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 
 </div>
 
 <!--/container-->
 @section Scripts {
+	<script>
+		$('.edit-button').on('click', function () {
+			var name = $(this).data('name');
+			var price = $(this).data('price');
+			var description = $(this).data('description');
+			var imageUrl = $(this).data('imageurl');
+			var productid = $(this).data('id');
+			$('#productid').val(productid);
+			$('#editName').val(name);
+			$('#editPrice').val(price);
+			$('#editDescription').val(description);
+			$('#editImageUrl').val(imageUrl);
+		});
+	</script>
 	<script>
 		$(document).ready(function () {
 
