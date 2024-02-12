@@ -37,9 +37,7 @@ jobs:
                run: dotnet test --no-build --verbosity normal
              
 
-             - name: Build CSS
-               run: npm run buildcss:release
-               working-directory: ./Src/Endpoints/Endpoint.web/EndPoint.Web/
+          
              - name: Publish
                run: dotnet publish -c Release --output ./Release
 
