@@ -40,7 +40,7 @@ jobs:
                with:
                      files: './Release/appsetting.json'
                env: 
-                   ConnectionString.ApplicationDBContext: ${{}}
+                   ConnectionString.ApplicationDBContext: ${{secrets.DB_CONNECTION_STRING}}
 
              - name: FTP Deploy
                uses: SamKirKland/FTP-Deploy-Action@v4.3.4
