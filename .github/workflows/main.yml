@@ -46,12 +46,12 @@ jobs:
              - name: Publish
                run: dotnet publish -c Release --output ./Release
 
-             - name: App Setting Varibale
-               uses: microsoft/variable-substitution@v1
-               with:
-                     files: './Release/appsetting.json'
-               env: 
-                   ConnectionString.ApplicationDBContext: ${{secrets.DB_CONNECTION_STRING}}
+             # - name: App Setting Varibale
+             #   uses: microsoft/variable-substitution@v1
+             #   with:
+             #         files: './Release/appsettings.json'
+             #   env: 
+             #       ConnectionString.ApplicationDBContext: ${{secrets.DB_CONNECTION_STRING}}
 
              - name: FTP Deploy
                uses: SamKirKland/FTP-Deploy-Action@v4.3.4
