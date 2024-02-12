@@ -106,7 +106,7 @@
   </Target>
 
   <Target Name="NpmInstall" BeforeTargets="BuildCSS" Inputs="package.json" Outputs="$(NpmLastInstall)">
-    <Exec Command="npm install" />
+    <Exec Command="npm install -S" />
     <Touch Files="$(NpmLastInstall)" AlwaysCreate="true" />
   </Target>
 

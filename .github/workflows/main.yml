@@ -26,12 +26,20 @@ jobs:
              - name: Restore Dependency
                run: dotnet restore
 
+             - name: Install npm dependencies
+               run: npm install
+               working-directory: ./Src/Endpoints/Endpoint.web/EndPoint.Web/
+
              - name: Build
                run: dotnet build --no-restore --verbosity normal
 
              - name: Test
                run: dotnet test --no-build --verbosity normal
              
+
+             - name: Build CSS
+               run: npm run buildcss:release
+               working-directory: ./Src/Endpoints/Endpoint.web/EndPoint.Web/
              - name: Publish
                run: dotnet publish -c Release --output ./Release
 
