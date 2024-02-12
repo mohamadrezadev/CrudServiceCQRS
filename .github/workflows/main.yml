@@ -35,9 +35,7 @@ jobs:
                run: npm install
                working-directory: ./Src/Endpoints/Endpoint.web/EndPoint.Web/
 
-             - name: Build CSS for Release
-               run: npm run buildcss:release
-               working-directory: ./Release/
+            
 
              - name: Build
                run: dotnet build --no-restore --verbosity normal
