@@ -5,7 +5,7 @@
   "main": "tailwind.config.js",
   "scripts": {
     "buildcss:dev": "cross-env TAILWIND_MODE=build npx tailwind build -i ./wwwroot/css/input.css -o ./wwwroot/css/output.css",
-    "buildcss:release": "cross-env NODE_ENV=production npx tailwind build -i ./wwwroot/css/input.css -o ./wwwroot/css/output.css"
+    "buildcss:release": "npx tailwind build -i ./wwwroot/css/input.css -o ./wwwroot/css/output.css"
   },
   "keywords": [],
   "author": "",
