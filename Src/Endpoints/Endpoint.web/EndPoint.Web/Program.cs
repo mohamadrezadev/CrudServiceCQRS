@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using EndPoint.Web.DependencyInjections;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using HealthChecks.UI.Client;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +19,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddApplication().AddInfrastructure(builder.Configuration);
 builder.Services.AddServices();
 
+builder.Services
+    .AddHealthChecks()
+    .AddSqlite(builder.Configuration.GetConnectionString("SqliteDb"));
+    
 
 var app = builder.Build();
 
@@ -44,4 +50,13 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+app.UseEndpoints(config =>
+{
+    config.MapHealthChecks("/health", new HealthCheckOptions
+    {
+        Predicate = _ => true,
+        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+
+    });
+});
 app.Run();
