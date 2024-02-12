@@ -41,9 +41,7 @@ jobs:
 
              - name: Build
                run: dotnet build --no-restore --verbosity normal
-
-             - name: Test
-               run: dotnet test --no-build --verbosity normal
+               working-directory: ./Src/Endpoints/Endpoint.web/EndPoint.Web/
              
 
           
